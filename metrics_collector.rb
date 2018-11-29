@@ -5,6 +5,7 @@ require 'chronic'
 require 'redis'
 require 'rack'
 require "google_drive"
+require 'dotenv/load'
 require_relative "jor/errors"
 require_relative "jor/storage"
 require_relative "jor/collection"
@@ -12,11 +13,12 @@ require_relative "jor/doc"
 require_relative "jor/server"
 require_relative "jor/version"
 
+
 session = GoogleDrive::Session.from_service_account_key("#{Dir.pwd}/config/gserviceaccountconfig.json")
-ws1 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[0]
-ws2 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[1]
-ws3 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[2]
-ws4 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[3]
+ws1 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[0]
+ws2 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[1]
+ws3 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[2]
+ws4 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[3]
 
 module JOR
 end
@@ -32,7 +34,7 @@ $jor.create_collection("contacts", :auto_increment => true)
 @vidoffset = 0
 loop do
 
-uri = URI("https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=2e6b4db5-aa4d-4870-8979-424d80bd2745&count=100&vidOffset=#{@vidoffset}&property=hubspot_team_id&property=hubspot_owner_id&property=hs_lead_status&property=month&property=email&property=tag&property=kind")
+uri = URI("https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=#{ENV['HS']}&count=100&vidOffset=#{@vidoffset}&property=hubspot_team_id&property=hubspot_owner_id&property=hs_lead_status&property=month&property=email&property=tag&property=kind")
 request = Net::HTTP::Get.new(uri)
 
 response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|

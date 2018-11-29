@@ -5,7 +5,7 @@ require 'json'
 require 'erb'
 require 'mail'
 require "google_drive"
-
+require 'dotenv/load'
 
 class MailWorker
   include Sidekiq::Worker
@@ -24,10 +24,10 @@ class MailWorker
 
   def perform
     session = GoogleDrive::Session.from_service_account_key("#{Dir.pwd}/config/gserviceaccountconfig.json")
-    ws1 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[0]
-    ws2 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[1]
-    ws3 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[2]
-    ws4 = session.spreadsheet_by_key("1IPixH0u4OZTeVbsWHf0kE18YBl2EoYPaWWeHrY4kQwI").worksheets[3]
+    ws1 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[0]
+    ws2 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[1]
+    ws3 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[2]
+    ws4 = session.spreadsheet_by_key("#{ENV['GSHEET']}").worksheets[3]
 
     (2..ws2.num_rows).each do |row|
           #Pick up Hubspot contact metrics
