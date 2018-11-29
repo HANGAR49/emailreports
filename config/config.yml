@@ -5,9 +5,3 @@ smtp:
     user: postmaster@sandbox7943d21bbe004fa59902120da7144531.mailgun.org
     pass: 0c4f8c3bcad9a6e824a74c854c23134d-4836d8f5-5dd860df
     domain: sandbox7943d21bbe004fa59902120da7144531.mailgun.org
-  gmail:
-    host: smtp.gmail.com
-    port: 587
-    user: arnold.fungai@gmail.com
-    pass: arn01d-fungai
-    domain: gmail.com
