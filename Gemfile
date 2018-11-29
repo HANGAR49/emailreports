@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'sidekiq'
+gem 'rspec'
+gem 'mail'
+gem 'chronic'
+gem 'zaru'
+gem 'foreman'
+gem 'thin'
+gem 'google_drive'
