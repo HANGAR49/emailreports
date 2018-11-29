@@ -1,0 +1,28 @@
+From: <%= sender %> <<%= from %>>
+To: <%= recipients %>
+Subject: <%= subject %>
+
+Hi <%= @contact %>
+
+These are the latest metrics for leads and campaigns(<%= @campaigns %>) for the month of <%= @month %>.
+
+Leads sourced: <%= @leads %>
+
+Reached out to: <%= @wp_reachedout %> and <%= @reachout %>(LinkedIn)
+
+Read: <%= @wp_read %>%
+
+Replied: <%= @wp_replied %>% and <%= @replied %>(LinkedIn)
+
+      POSITIVE: <%= @wp_positive %>%
+      NEGATIVE: <%= @wp_negative %>%
+      NEUTRAL: <%= @wp_neutral %>%
+
+Meetings set: <%= @meetingset %>
+
+Meetings to be set: <%= @meeting2bset1 %> and <%= @meeting2bset2 %>(LinkedIn)
+
+
+Regards,
+
+<%= @owner %>
